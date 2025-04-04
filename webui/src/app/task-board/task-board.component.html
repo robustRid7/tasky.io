@@ -1,18 +1,58 @@
-<div class="task-board" cdkDropListGroup>
+<div class="task-board-wrapper">
+  <button (click)="openBoardForm()" class="add-board-btn">+ Add Task Board</button>
+
+  <div class="task-board-grid" cdkDropListGroup>
     <div *ngFor="let board of taskBoards" class="task-container">
-      <h3>{{ board.name }}</h3>
-  
+      <div class="task-header">
+        <h3 (dblclick)="editBoard(board)">{{ board.name }}</h3>
+        <button (click)="deleteBoard(board._id)" class="delete-btn" title="Delete Board">❌</button>
+      </div>
+
+      <button (click)="openSubtaskForm(board._id)" class="add-subtask-btn">+ Add Ticket</button>
+
       <div
         cdkDropList
         [cdkDropListData]="board.subtasks"
-        [id]="board.id"
+        [cdkDropListConnectedTo]="connectedTo"
+        [id]="board._id"
         class="subtask-list"
         (cdkDropListDropped)="drop($event)"
       >
         <div *ngFor="let subtask of board.subtasks" cdkDrag class="subtask">
-          {{ subtask }}
+          <h4>{{ subtask.title }}</h4>
+          <p *ngIf="subtask.description"><strong>Description:</strong> {{ subtask.description }}</p>
+          <p *ngIf="subtask.notes"><strong>Notes:</strong> {{ subtask.notes }}</p>
         </div>
       </div>
     </div>
   </div>
-  
+</div>
+
+<!-- Ticket Form Modal -->
+<div *ngIf="showSubtaskForm" class="modal">
+  <div class="modal-content">
+    <h3>Add Ticket</h3>
+    <label>Title:</label>
+    <input type="text" [(ngModel)]="newSubtask.title" required />
+
+    <label>Description:</label>
+    <input type="text" [(ngModel)]="newSubtask.description" />
+
+    <label>Notes:</label>
+    <input type="text" [(ngModel)]="newSubtask.notes" />
+
+    <button (click)="submitSubtask()">Add Ticket</button>
+    <button (click)="showSubtaskForm = false">Cancel</button>
+  </div>
+</div>
+
+<!-- Board Form Modal -->
+<div *ngIf="showBoardForm" class="modal">
+  <div class="modal-content">
+    <h3>Add Board</h3>
+    <label>Board Name:</label>
+    <input type="text" [(ngModel)]="newBoardName" />
+    <button (click)="submitBoard()">Add Board</button>
+    <button (click)="showBoardForm = false">Cancel</button>
+  </div>
+</div>

@@ -1,7 +1,17 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1; /* Pushes the footer down */
+}
+
+
 .form {
     float: left;  // Moves the form to the left side
     margin-top: 5rem;
     margin-left: 50%;  // Centers it
     transform: translateX(-50%);  // Adjusts for perfect centering
   }
-  
