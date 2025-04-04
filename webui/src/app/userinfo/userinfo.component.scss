@@ -1,0 +1,53 @@
+.user-info-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .profile-section {
+    margin-bottom: 20px;
+  
+    .profile-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #4F46E5;
+    }
+  
+    input[type="file"] {
+      display: none;
+    }
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+    text-align: left;
+  
+    label {
+      font-weight: bold;
+    }
+  
+    input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background: #4F46E5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  
+    &:disabled {
+      background: gray;
+    }
+  }
+  

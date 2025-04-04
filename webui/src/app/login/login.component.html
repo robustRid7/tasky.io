@@ -1,0 +1,29 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+  <p class="app-title">Tasky.io Login</p>
+
+  <div class="input-container">
+    <input type="text" placeholder="Enter User ID" formControlName="userId">
+    <span *ngIf="loginForm.get('userId')?.invalid && loginForm.get('userId')?.touched">
+      <small *ngIf="loginForm.get('userId')?.hasError('required')">User ID is required</small>
+    </span>
+  </div>
+
+  <div class="input-container">
+    <input type="password" placeholder="Enter Password" formControlName="password">
+    <span *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+      <small *ngIf="loginForm.get('password')?.hasError('required')">Password is required</small>
+      <small *ngIf="loginForm.get('password')?.hasError('minlength')">Min 8 characters</small>
+    </span>
+  </div>
+
+  <button class="submit" type="submit" [disabled]="loginForm.invalid">Login</button>
+
+  <p class="signup-link">
+    Don't have an account?
+    <a routerLink="/signup">Sign up</a>
+  </p>
+  <p class="signup-link">
+    Forgot your password?
+    <a routerLink="/reset-password">Reset password</a>
+  </p>
+</form>

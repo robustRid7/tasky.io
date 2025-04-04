@@ -1,0 +1,14 @@
+<app-header></app-header>
+
+<nav class="navbar">
+  <button [class.active]="selectedTab === 'home'" (click)="selectTab('home')">HOME</button>
+  <button [class.active]="selectedTab === 'userinfo'" (click)="selectTab('userinfo')">USERINFO</button>
+  <button class="logout-btn" (click)="logout()">LOGOUT</button>
+</nav>
+
+<div class="content">
+  <app-task-board *ngIf="selectedTab === 'home'"></app-task-board>
+  <app-userinfo *ngIf="selectedTab === 'userinfo'"></app-userinfo>
+</div>
+
+<app-footer></app-footer>

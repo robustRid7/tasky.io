@@ -1,0 +1,25 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+    background-color: #4F46E5;
+  }
+  
+  .navbar button {
+    padding: 10px 15px;
+    border: none;
+    background: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .navbar button.active {
+    border-bottom: 2px solid white;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  

@@ -1,0 +1,18 @@
+<div class="task-board" cdkDropListGroup>
+    <div *ngFor="let board of taskBoards" class="task-container">
+      <h3>{{ board.name }}</h3>
+  
+      <div
+        cdkDropList
+        [cdkDropListData]="board.subtasks"
+        [id]="board.id"
+        class="subtask-list"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div *ngFor="let subtask of board.subtasks" cdkDrag class="subtask">
+          {{ subtask }}
+        </div>
+      </div>
+    </div>
+  </div>
+  

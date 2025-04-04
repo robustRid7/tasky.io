@@ -1,0 +1,59 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="form">
+    <p class="app-title">Tasky.io signup</p>
+    <!-- <p class="form-title">Sign Up</p> -->
+  
+    <div class="input-container">
+      <input type="text" placeholder="Enter User ID" formControlName="userId">
+      <span *ngIf="userIdAvailable === false">
+        <small>User ID is already taken</small>
+      </span>
+      <span *ngIf="userIdAvailable === true">
+        <small style="color: green;">User ID is available</small>
+      </span>
+    </div>
+  
+    <div class="input-container">
+      <input type="text" placeholder="Enter First Name" formControlName="firstName">
+      <span *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched">
+        <small>First Name is required</small>
+      </span>
+    </div>
+  
+    <div class="input-container">
+      <input type="text" placeholder="Enter Last Name" formControlName="lastName">
+      <span *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched">
+        <small>Last Name is required</small>
+      </span>
+    </div>
+  
+    <div class="input-container">
+      <input type="email" placeholder="Enter Email" formControlName="email">
+      <span *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+        <small *ngIf="signupForm.get('email')?.hasError('required')">Email is required</small>
+        <small *ngIf="signupForm.get('email')?.hasError('email')">Enter a valid email</small>
+      </span>
+    </div>
+  
+    <div class="input-container">
+      <input type="password" placeholder="Enter Password" formControlName="password">
+      <span *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+        <small *ngIf="signupForm.get('password')?.hasError('required')">Password is required</small>
+        <small *ngIf="signupForm.get('password')?.hasError('minlength')">Min 8 characters</small>
+      </span>
+    </div>
+  
+    <div class="input-container">
+      <input type="password" placeholder="Confirm Password" formControlName="confirmPassword">
+      <span *ngIf="signupForm.hasError('mismatch') && signupForm.get('confirmPassword')?.touched">
+        <small>Passwords do not match</small>
+      </span>
+    </div>
+  
+    <button class="submit" type="submit" [disabled]="signupForm.invalid || userIdAvailable === false">Sign Up</button>
+  
+    <p class="signup-link">
+      Already have an account?
+      <a routerLink="/login">Login</a>
+    </p>
+  </form>
+  

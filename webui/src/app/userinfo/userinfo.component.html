@@ -1,0 +1,55 @@
+<div class="user-info-container">
+    <!-- Profile Picture -->
+    <div class="profile-section">
+      <label for="profileImage">
+        <img [src]="userProfileImage" alt="Profile Picture" class="profile-img">
+      </label>
+      <input type="file" id="profileImage" (change)="onFileSelected($event)">
+    </div>
+  
+    <!-- User Form -->
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      
+      <!-- User ID -->
+      <div class="input-group">
+        <label>User ID</label>
+        <input type="text" formControlName="userId" (input)="checkUserIdAvailability(userForm.value.userId)" required>
+        <span *ngIf="userIdAvailable === false">
+          <small style="color: red;">User ID is already taken</small>
+        </span>
+        <span *ngIf="userIdAvailable === true">
+          <small style="color: green;">User ID is available</small>
+        </span>
+      </div>
+  
+      <!-- First Name -->
+      <div class="input-group">
+        <label>First Name</label>
+        <input type="text" formControlName="firstName" required>
+      </div>
+  
+      <!-- Last Name -->
+      <div class="input-group">
+        <label>Last Name</label>
+        <input type="text" formControlName="lastName" required>
+      </div>
+  
+      <!-- Email -->
+      <!-- <div class="input-group">
+        <label>Email</label>
+        <input type="email" formControlName="email" required>
+      </div> -->
+  
+      <!-- Password -->
+      <div class="input-group">
+        <label>New Password (Optional)</label>
+        <input type="password" formControlName="password">
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" [disabled]="userForm.invalid || userIdAvailable === false">
+        Update Profile
+      </button>
+    </form>
+  </div>
+  
