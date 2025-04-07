@@ -12,6 +12,7 @@ const subtaskSchema = new Schema(
     timestamps: true
   }
 );
+subtaskSchema.index({ taskBoardId: 1 });
 
 const Subtask = model('Subtask', subtaskSchema);
 module.exports = Subtask;

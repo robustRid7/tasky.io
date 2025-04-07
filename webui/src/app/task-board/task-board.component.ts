@@ -61,12 +61,14 @@ export class TaskBoardComponent implements OnInit {
       this.taskService.moveSubTask({
         subtaskId: movedSubtask._id,
         previousBoardId,
-        newBoardId
+        newBoardId,
+        index: event.currentIndex,
       }).subscribe({
         next: (res: any) => this.toastr.success(res.message || "Subtask moved successfully!"),
         error: (err) => {
           this.toastr.error(err?.error?.message || "Failed to move subtask");
           console.error("Failed to move subtask", err);
+          this.fetchBoards()
         }
       });
     }

@@ -133,13 +133,14 @@ const moveSubTask = async function (req, res) {
     }
 
     const { id } = req.user;
-    const { subtaskId, previousBoardId, newBoardId } = value;
-
+    const { subtaskId, previousBoardId, newBoardId, index } = value;
+    console.log(index)
     const result = await updateSubTaskList({
       subtaskId,
       previousBoardId,
       newBoardId,
       id,
+      fixIndex: index,
     });
 
     return res.status(200).json({

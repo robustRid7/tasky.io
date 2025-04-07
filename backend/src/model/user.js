@@ -18,6 +18,8 @@ const userSchema = new Schema(
   }
 );
 
+userSchema.index({ userId: 1 }, { unique: true });
+
 userSchema.pre("save", function (next) {
   this.fullName = `${this.firstName} ${this.lastName}`;
   next();

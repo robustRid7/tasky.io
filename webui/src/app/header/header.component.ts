@@ -43,7 +43,8 @@ export class HeaderComponent implements OnInit {
           };
         },
         error: () => {
-          this.toastr.error('Failed to load profile image');
+          this.userProfileImage = 'assets/user.pf.png';
+          // this.toastr.error('Failed to load profile image');
         }
       });
     }

@@ -5,7 +5,7 @@ export interface SubTask {
   }
   
   export interface StatusColumn {
-    statusName: string;   // e.g., "Backlog", "In Progress"
+    statusName: string; 
     subTasks: SubTask[];
   }
   

@@ -1,6 +1,7 @@
 const CustomError = require('../common/error');
 const Subtask = require('../model/subTask');
 const TaskBoard = require('../model/taskBoard');
+const { Types } = require('mongoose');
 
 const addTask = async function ({ name, id }) {
   try {
@@ -95,6 +96,7 @@ const updateSubTaskList = async ({
   previousBoardId,
   newBoardId,
   id,
+  fixIndex,
 }) => {
   try {
     const previousBoard = await TaskBoard.findOne({
@@ -126,7 +128,7 @@ const updateSubTaskList = async ({
       (id) => id.toString() === subtask._id.toString()
     );
     if (index !== -1) previousBoard.subtasks.splice(index, 1); 
-    newBoard.subtasks.push(subtask._id)
+    newBoard.subtasks.splice(fixIndex, 0, subtask._id);
     subtask.boardId = newBoardId;
 
     await Promise.all([

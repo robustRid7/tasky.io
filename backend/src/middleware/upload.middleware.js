@@ -2,13 +2,11 @@ const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
 
-// ✅ Ensure Upload Directory Exists
 const uploadDir = path.join(__dirname, "uploads");
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-// ✅ Storage Configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, uploadDir);
@@ -20,7 +18,6 @@ const storage = multer.diskStorage({
   },
 });
 
-// ✅ File Filter - Allow Images, Audio & CSV
 const fileFilter = (req, file, cb) => {
   const allowedTypes = [
     "image/png",
@@ -28,9 +25,6 @@ const fileFilter = (req, file, cb) => {
     "image/jpeg",
     "image/webp",
     "image/svg+xml",
-    "text/csv",
-    "audio/mpeg",
-    "audio/wav",
   ];
 
   if (allowedTypes.includes(file.mimetype)) {
@@ -40,11 +34,10 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-// ✅ Multer Upload Middleware (5MB Limit)
 const upload = multer({ 
   storage, 
   fileFilter,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  limits: { fileSize: 5 * 1024 * 1024 },
 });
 
 module.exports = upload;

@@ -15,7 +15,8 @@ const addSubTaskValidor = Joi.object({
 const moveSubTaskValidator = Joi.object({
     subtaskId: Joi.string().required(),
     previousBoardId: Joi.string().required(),
-    newBoardId: Joi.string().required()
+    newBoardId: Joi.string().required(),
+    index: Joi.number().required(),
   });
 
   const updateTaskBoardValidator = Joi.object({
