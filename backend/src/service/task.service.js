@@ -99,6 +99,7 @@ const updateSubTaskList = async ({
   fixIndex,
 }) => {
   try {
+
     const previousBoard = await TaskBoard.findOne({
       _id: previousBoardId,
       createdBy: id,
@@ -107,20 +108,35 @@ const updateSubTaskList = async ({
       throw new CustomError(403, "You don't have permission for the previous board");
     }
 
-    const newBoard = await TaskBoard.findOne({
-      _id: newBoardId,
-      createdBy: id,
-    });
-    if (!newBoard) {
-      throw new CustomError(403, "You don't have permission for the new board");
-    }
-
     const subtask = await Subtask.findOne({
       _id: subtaskId,
     });
 
     if (!subtask) {
       throw new CustomError(404, "Subtask not found in previous board");
+    }
+
+    
+    if(newBoardId == previousBoardId){
+      let index = previousBoard.subtasks.findIndex(
+        (id) => id.toString() === subtask._id.toString()
+      );
+      if (index !== -1) previousBoard.subtasks.splice(index, 1); 
+      previousBoard.subtasks.splice(fixIndex, 0, subtask._id);
+      await previousBoard.save();
+      return {
+      success: true,
+      message: "Subtask moved successfully",
+      data: subtask,
+    };
+    }
+
+    const newBoard = await TaskBoard.findOne({
+      _id: newBoardId,
+      createdBy: id,
+    });
+    if (!newBoard) {
+      throw new CustomError(403, "You don't have permission for the new board");
     }
 
     
